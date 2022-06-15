@@ -14,7 +14,11 @@ function App({}) {
   return (
     <div>
       <h1>Hello {place}</h1>
-      <button onClick={() => setNewCity("Aachen")}>
+      <button
+        onClick={() =>
+          setNewCity(newCity === "Paris" ? "Berlin" : "Copenhagen")
+        }
+      >
         Discover a new place!
       </button>
       {/* <MyButton /> */}
