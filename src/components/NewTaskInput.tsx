@@ -8,6 +8,11 @@ interface HandleNewTask {
 const NewTaskInput = ({ onNewTask }: HandleNewTask) => {
   const [task, setTask] = useState("");
   const newTask = task;
+
+  const handleClick = () => {
+    onNewTask(newTask);
+    setTask("");
+  };
   return (
     <Flex
       display="flex"
@@ -19,6 +24,7 @@ const NewTaskInput = ({ onNewTask }: HandleNewTask) => {
     >
       <Input
         onChange={(event) => setTask(event.target.value)}
+        value={task}
         type="text"
         maxW="16rem"
         variant="flushed"
@@ -27,7 +33,7 @@ const NewTaskInput = ({ onNewTask }: HandleNewTask) => {
         color="white"
       />
       <Spacer />
-      <Button onClick={() => onNewTask(newTask)} colorScheme="pink">
+      <Button onClick={handleClick} colorScheme="pink">
         Add new task
       </Button>
     </Flex>

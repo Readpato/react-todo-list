@@ -11,6 +11,9 @@ const App = () => {
   const titleName: string = "Todo list!";
   const [tasks, setTasks] = useState<Array<Task>>([]);
   const handleNewTask = (task: string) => {
+    if (task === "") {
+      return;
+    }
     const id = tasks.length + 1;
     const text = task;
     const newTask: Task = { text: text, id: id };
@@ -23,7 +26,11 @@ const App = () => {
           {titleName}
         </Text>
         <NewTaskInput onNewTask={handleNewTask} />
-        <TaskList currentTasks={tasks} />
+        {tasks.length === 0 ? (
+          <Text mt="5">No tasks. Go enjoy your day!</Text>
+        ) : (
+          <TaskList currentTasks={tasks} />
+        )}
       </Flex>
     </Container>
   );
