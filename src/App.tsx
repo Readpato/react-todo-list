@@ -1,32 +1,18 @@
-import { useState } from "react";
-import { Container, Center, Flex } from "@chakra-ui/react";
+import { Container, Flex, Text } from "@chakra-ui/react";
+import NewTaskInput from "./components/NewTaskInput";
 
-type City = {
-  city: string;
-};
-
-let place: string = "world";
-// const MyButton = ({}) => <button>Change place</button>;
-const MyCityTitle = ({ city }: City) => <h2>A new place to see is {city}</h2>;
-
-function App({}) {
-  const [newCity, setNewCity] = useState("Paris");
+const App = () => {
+  const titleName: string = "Todo list!";
   return (
-    <Container bg={"tomato"} maxW="full" h="calc(100vh)">
-      <Flex direction={"column"} alignItems={"center"} justifyItems={"center"}>
-        <h1>Hello {place}</h1>
-        <button
-          onClick={() =>
-            setNewCity(newCity === "Paris" ? "Berlin" : "Copenhagen")
-          }
-        >
-          Discover a new place!
-        </button>
-        {/* <MyButton /> */}
-        <MyCityTitle city={newCity} />
+    <Container bg="purple.900" maxW="full" h="calc(100vh)" color="pink.400">
+      <Flex direction="column" alignItems="center" justifyItems="center">
+        <Text fontSize="3xl" fontStyle="italic">
+          {titleName}
+        </Text>
+        <NewTaskInput />
       </Flex>
     </Container>
   );
-}
+};
 
 export default App;
