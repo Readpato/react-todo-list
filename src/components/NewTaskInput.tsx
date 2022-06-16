@@ -1,6 +1,13 @@
 import { Input, Button, Spacer, Flex } from "@chakra-ui/react";
+import { useState } from "react";
 
-const NewTaskInput = () => {
+interface HandleNewTask {
+  onNewTask: (newTask: string) => void;
+}
+
+const NewTaskInput = ({ onNewTask }: HandleNewTask) => {
+  const [task, setTask] = useState("");
+  const newTask = task;
   return (
     <Flex
       display="flex"
@@ -11,6 +18,7 @@ const NewTaskInput = () => {
       h={{ base: "6rem", md: "4rem" }}
     >
       <Input
+        onChange={(event) => setTask(event.target.value)}
         type="text"
         maxW="16rem"
         variant="flushed"
@@ -19,7 +27,9 @@ const NewTaskInput = () => {
         color="white"
       />
       <Spacer />
-      <Button colorScheme="pink">Add new task</Button>
+      <Button onClick={() => onNewTask(newTask)} colorScheme="pink">
+        Add new task
+      </Button>
     </Flex>
   );
 };
