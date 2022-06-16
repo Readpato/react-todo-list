@@ -1,18 +1,20 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import NewTaskInput from "./components/NewTaskInput";
-interface Tasks {
-  task: string;
+import TaskList from "./components/TaskList";
+interface Task {
+  text: string;
   id: number;
 }
 
 const App = () => {
   const titleName: string = "Todo list!";
-  const tasks: Array<Tasks> = [];
+  const [tasks, setTasks] = useState<Array<Task>>([]);
   const handleNewTask = (task: string) => {
     const id = tasks.length + 1;
-    const newTask = task;
-    tasks.push({ task: newTask, id: id });
-    console.log(tasks);
+    const text = task;
+    const newTask: Task = { text: text, id: id };
+    setTasks([...tasks, newTask]);
   };
   return (
     <Container bg="purple.900" maxW="full" h="calc(100vh)" color="pink.400">
@@ -21,6 +23,7 @@ const App = () => {
           {titleName}
         </Text>
         <NewTaskInput onNewTask={handleNewTask} />
+        <TaskList currentTasks={tasks} />
       </Flex>
     </Container>
   );
