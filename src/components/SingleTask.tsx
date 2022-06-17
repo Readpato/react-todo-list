@@ -1,7 +1,6 @@
 import { ListItem, Text, ListIcon, Button, Flex } from "@chakra-ui/react";
 import { ChevronRightIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import DeleteButton from "./DeleteButton";
 
 interface Task {
   text: string;
