@@ -1,16 +1,18 @@
-import { List } from "@chakra-ui/react";
+import { List, Button } from "@chakra-ui/react";
+import { useState } from "react";
 import SingleTask from "./SingleTask";
 
-interface Tasks {
+interface Task {
   text: string;
   id: number;
 }
 
 type TodoListProps = {
-  currentTasks: Array<Tasks>;
+  currentTasks: Array<Task>;
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
-const TaskList = ({ currentTasks }: TodoListProps) => {
+const TaskList = ({ currentTasks, setTasks }: TodoListProps) => {
   return (
     <List spacing={2} mt={5}>
       <SingleTask currentTasks={currentTasks}></SingleTask>

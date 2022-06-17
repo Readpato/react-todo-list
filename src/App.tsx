@@ -14,7 +14,7 @@ const App = () => {
     if (task === "") {
       return;
     }
-    const id = tasks.length + 1;
+    const id = Date.now();
     const text = task;
     const newTask: Task = { text: text, id: id };
     setTasks([...tasks, newTask]);
@@ -29,7 +29,7 @@ const App = () => {
         {tasks.length === 0 ? (
           <Text mt="5">No tasks. Go enjoy your day!</Text>
         ) : (
-          <TaskList currentTasks={tasks} />
+          <TaskList currentTasks={tasks} setTasks={setTasks} />
         )}
       </Flex>
     </Container>

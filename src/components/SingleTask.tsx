@@ -1,14 +1,15 @@
-import { ListItem, Text, ListIcon } from "@chakra-ui/react";
+import { ListItem, Text, ListIcon, Button, Flex } from "@chakra-ui/react";
 import { ChevronRightIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import DeleteButton from "./DeleteButton";
 
-interface Tasks {
+interface Task {
   text: string;
   id: number;
 }
 
 type SingleTaskProp = {
-  currentTasks: Array<Tasks>;
+  currentTasks: Array<Task>;
 };
 
 const SingleTask = ({ currentTasks }: SingleTaskProp) => {
@@ -22,25 +23,32 @@ const SingleTask = ({ currentTasks }: SingleTaskProp) => {
     }
     setCompletedId([...completedTaskId, id]);
   };
+  const handleDeleteClick = () => {
+    console.log(currentTasks);
+    // setTasks()
+  };
   const tasksToDo = currentTasks.map((task) => (
     <ListItem
       key={task.id}
       display="flex"
+      flexDirection="column"
       alignItems="center"
       justifyContent="center"
       onClick={() => handleClick(task.id)}
     >
-      {completedTaskId.includes(task.id) ? (
-        <ListIcon as={CheckCircleIcon} color="green.500" />
-      ) : (
-        <ListIcon as={ChevronRightIcon}></ListIcon>
-      )}
-      <Text
-        fontSize="1xl"
-        as={completedTaskId.includes(task.id) ? "s" : undefined}
-      >
-        {task.text}
-      </Text>
+      <Flex alignItems="center" justifyContent="center">
+        {completedTaskId.includes(task.id) ? (
+          <ListIcon as={CheckCircleIcon} color="green.500" />
+        ) : (
+          <ListIcon as={ChevronRightIcon}></ListIcon>
+        )}
+        <Text
+          fontSize="1xl"
+          as={completedTaskId.includes(task.id) ? "s" : undefined}
+        >
+          {task.text}
+        </Text>
+      </Flex>
     </ListItem>
   ));
 
