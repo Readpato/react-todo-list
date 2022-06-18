@@ -9,18 +9,18 @@ interface Task {
 
 type TodoListProps = {
   currentTasks: Array<Task>;
-  onCompletedTask: (id: number) => void;
+  onTaskClick: (id: number) => void;
 };
 
-const TaskList = ({ currentTasks, onCompletedTask }: TodoListProps) => {
+const TaskList = ({ currentTasks, onTaskClick }: TodoListProps) => {
   const deleteTask = (id: number) => {
-    onCompletedTask(id);
+    onTaskClick(id);
   };
   return (
     <List spacing={2} mt={5}>
       <SingleTask
         currentTasks={currentTasks}
-        onCompletedTask={deleteTask}
+        onTaskClick={deleteTask}
       ></SingleTask>
     </List>
   );

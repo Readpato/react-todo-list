@@ -20,9 +20,9 @@ const App = () => {
     const newTask: Task = { text: text, id: id, completed: false };
     setTasks([...tasks, newTask]);
   };
-  const completeTask = (id: number) => {
-    const completedTaskIndex = tasks.findIndex((task) => task.id === id);
-    tasks[completedTaskIndex].completed = true;
+  const updateTaskStatus = (id: number) => {
+    const taskToUpdate = tasks[tasks.findIndex((task) => task.id === id)];
+    taskToUpdate.completed = !taskToUpdate.completed;
     setTasks([...tasks]);
   };
   return (
@@ -35,7 +35,7 @@ const App = () => {
         {tasks.length === 0 ? (
           <Text mt="5">No tasks. Go enjoy your day!</Text>
         ) : (
-          <TaskList currentTasks={tasks} onCompletedTask={completeTask} />
+          <TaskList currentTasks={tasks} onTaskClick={updateTaskStatus} />
         )}
       </Flex>
     </Container>

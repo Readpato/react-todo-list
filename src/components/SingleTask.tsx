@@ -10,12 +10,12 @@ interface Task {
 
 type SingleTaskProp = {
   currentTasks: Array<Task>;
-  onCompletedTask: (id: number) => void;
+  onTaskClick: (id: number) => void;
 };
 
-const SingleTask = ({ currentTasks, onCompletedTask }: SingleTaskProp) => {
+const SingleTask = ({ currentTasks, onTaskClick }: SingleTaskProp) => {
   const handleClick = (id: number, completed: boolean) => {
-    onCompletedTask(id);
+    onTaskClick(id);
   };
   const tasksToDo = currentTasks.map((task) => (
     <ListItem
