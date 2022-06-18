@@ -5,26 +5,17 @@ import { useState } from "react";
 interface Task {
   text: string;
   id: number;
+  completed: boolean;
 }
 
 type SingleTaskProp = {
   currentTasks: Array<Task>;
+  onCompletedTask: (id: number) => void;
 };
 
-const SingleTask = ({ currentTasks }: SingleTaskProp) => {
-  const [completedTaskId, setCompletedId] = useState<Array<number>>([]);
-  const handleClick = (id: number) => {
-    if (completedTaskId.includes(id)) {
-      const indexToDelete = completedTaskId.indexOf(id);
-      completedTaskId.splice(indexToDelete, 1);
-      setCompletedId([...completedTaskId]);
-      return;
-    }
-    setCompletedId([...completedTaskId, id]);
-  };
-  const handleDeleteClick = () => {
-    console.log(currentTasks);
-    // setTasks()
+const SingleTask = ({ currentTasks, onCompletedTask }: SingleTaskProp) => {
+  const handleClick = (id: number, completed: boolean) => {
+    onCompletedTask(id);
   };
   const tasksToDo = currentTasks.map((task) => (
     <ListItem
@@ -33,18 +24,15 @@ const SingleTask = ({ currentTasks }: SingleTaskProp) => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      onClick={() => handleClick(task.id)}
+      onClick={() => handleClick(task.id, task.completed)}
     >
       <Flex alignItems="center" justifyContent="center">
-        {completedTaskId.includes(task.id) ? (
+        {task.completed ? (
           <ListIcon as={CheckCircleIcon} color="green.500" />
         ) : (
           <ListIcon as={ChevronRightIcon}></ListIcon>
         )}
-        <Text
-          fontSize="1xl"
-          as={completedTaskId.includes(task.id) ? "s" : undefined}
-        >
+        <Text fontSize="1xl" as={task.completed ? "s" : undefined}>
           {task.text}
         </Text>
       </Flex>

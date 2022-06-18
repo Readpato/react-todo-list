@@ -5,6 +5,7 @@ import TaskList from "./components/TaskList";
 interface Task {
   text: string;
   id: number;
+  completed: boolean;
 }
 
 const App = () => {
@@ -16,8 +17,13 @@ const App = () => {
     }
     const id = Date.now();
     const text = task;
-    const newTask: Task = { text: text, id: id };
+    const newTask: Task = { text: text, id: id, completed: false };
     setTasks([...tasks, newTask]);
+  };
+  const completeTask = (id: number) => {
+    const completedTaskIndex = tasks.findIndex((task) => task.id === id);
+    tasks[completedTaskIndex].completed = true;
+    setTasks([...tasks]);
   };
   return (
     <Container bg="purple.900" maxW="full" h="calc(100vh)" color="pink.400">
@@ -29,7 +35,7 @@ const App = () => {
         {tasks.length === 0 ? (
           <Text mt="5">No tasks. Go enjoy your day!</Text>
         ) : (
-          <TaskList currentTasks={tasks} setTasks={setTasks} />
+          <TaskList currentTasks={tasks} onCompletedTask={completeTask} />
         )}
       </Flex>
     </Container>
