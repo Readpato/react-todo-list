@@ -1,4 +1,4 @@
-import { ListItem, Text, ListIcon, Button, Flex } from "@chakra-ui/react";
+import { ListItem, Text, ListIcon, Flex } from "@chakra-ui/react";
 import { ChevronRightIcon, CheckCircleIcon } from "@chakra-ui/icons";
 
 interface Task {
@@ -13,7 +13,7 @@ type SingleTaskProp = {
 };
 
 const SingleTask = ({ currentTasks, onTaskClick }: SingleTaskProp) => {
-  const handleClick = (id: number, completed: boolean) => {
+  const handleClick = (id: number) => {
     onTaskClick(id);
   };
   const tasksToDo = currentTasks.map((task) => (
@@ -23,7 +23,7 @@ const SingleTask = ({ currentTasks, onTaskClick }: SingleTaskProp) => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      onClick={() => handleClick(task.id, task.completed)}
+      onClick={() => handleClick(task.id)}
     >
       <Flex alignItems="center" justifyContent="center">
         {task.completed ? (
